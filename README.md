@@ -1,4 +1,4 @@
-# Fun Weather (`mod_funweather`)
+# Fun Weather - `mod_funweather`
 
 A small, funny, multi-language weather module for Joomla 4 / 5 / 6, built for the
 S.O.D. Dojazdów allotment garden site (dojazdowdzialki.pl).
