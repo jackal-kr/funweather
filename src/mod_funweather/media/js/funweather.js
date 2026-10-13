@@ -88,7 +88,8 @@
 			for (i = 0; i < n; i++) parts.rain.push({ x: Math.random(), y: Math.random(), l: R(12, 22), v: R(1.1, 1.8) });
 			n = s.snow * 40;
 			for (i = 0; i < n; i++) { var cr = Math.random() < .4; parts.snow.push({ x: Math.random(), y: Math.random(), crystal: cr, r: cr ? R(3, 5.5) : R(1, 2.4), v: R(.08, .2), ph: R(0, 6.3), rot: R(0, 3.1), spin: R(-.8, .8) }); }
-			for (i = 0; i < Math.min(5, Math.ceil(s.clouds * .6)); i++) parts.clouds.push({ x: Math.random() * 1.3 - .15, y: R(.02, .6), s: R(18, 36), a: Math.random(), v: R(.008, .02) });
+			var part = s.theme === 'clear' && s.clouds >= 2;   // partly cloudy: more, bigger clouds, some passing over the sun (top right)
+			for (i = 0; i < Math.min(5, Math.ceil(s.clouds * .6)) + (part ? 1 : 0); i++) parts.clouds.push({ x: part && i < 2 ? R(.45, 1) : Math.random() * 1.3 - .15, y: part && i < 2 ? R(.05, .3) : R(.02, .6), s: part ? R(26, 44) : R(18, 36), a: Math.random(), v: R(.008, .02) });
 			if (s.night && !s.rain && !s.snow && s.clouds < 6) for (i = 0; i < 46; i++) parts.stars.push({ x: Math.random(), y: Math.random() * .85, r: R(.6, 1.9), ph: R(0, 6.3), sp: R(1, 3) });
 			var calm = !s.rain && !s.snow && !s.storm, seas = s.season;
 			if (seas === 'autumn' && calm) { n = Math.min(18, 8 + rnd(s.wind / 5)); for (i = 0; i < n; i++) parts.leaves.push({ x: Math.random(), y: Math.random(), z: R(5, 9), v: R(.05, .11), ph: R(0, 6.3), rot: R(0, 6.3), spin: R(-1.5, 1.5), c: LEAF[i % LEAF.length] }); }
@@ -106,6 +107,7 @@
 
 		function drawCloud(c) {
 			var x = c.x * W, y = c.y * H, r = c.s, a = pal.cloudA[0] + c.a * (pal.cloudA[1] - pal.cloudA[0]);
+			if (s.theme === 'clear' && s.clouds >= 2) a = Math.min(.7, a * 2);   // partly cloudy: clearly visible clouds, in front of the sun
 			ctx.fillStyle = pal.cloud + (s.night && !s.light ? a * .65 : a) + ')';
 			ctx.beginPath();
 			ctx.arc(x, y, r * .6, 0, 6.3); ctx.arc(x + r * .7, y - r * .25, r * .75, 0, 6.3);
@@ -121,6 +123,8 @@
 
 			// sun (glow + slowly turning rays) or moon
 			if (s.fxw && s.theme === 'clear' && s.clouds < 6) {
+				var cov = Math.max(0, Math.min(1, (s.clouds - 1) / 5));   // 0 clear .. ~.8 mostly cloudy: the sun fades behind the cloud layer
+				ctx.save(); ctx.globalAlpha = 1 - .6 * cov;
 				var gx = W * .86, gy = H * .2, pulse = s.night ? 1 : 1 + Math.sin(t * 1.2) * .06, k = Math.min(W, H);
 				var g = ctx.createRadialGradient(gx, gy, 0, gx, gy, (s.night ? Math.max(W * .28, 80) : Math.max(W * .5, 120)) * pulse);
 				g.addColorStop(0, s.night ? pal.moonGlow : pal.sun);
@@ -140,6 +144,7 @@
 					}
 					ctx.stroke();
 				}
+				ctx.restore();
 			}
 
 			// night with clouds, rain or snow: a faint moonlit haze where the moon would be

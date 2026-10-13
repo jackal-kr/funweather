@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.9.4 — 2026-10-13
+- Partly cloudy: clouds are more opaque and bigger, some drift in front of the sun, and the sun fades with cloud cover, so it no longer looks sunny.
+
 ## 1.9.3 — 2026-10-13
 - Fix: the condition and icon now follow the model's cloud cover for dry skies, so "clear sky" is no longer shown under a cloudy sky (weather_code and cloud_cover could disagree).
 
