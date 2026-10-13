@@ -7,7 +7,7 @@
 	<creationDate>2026-10-13</creationDate>
 	<copyright>Copyright (C) 2026 JOD. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
-	<version>1.9.2</version>
+	<version>1.9.3</version>
 	<description>MOD_FUNWEATHER_XML_DESCRIPTION</description>
 
 	<namespace path="src">Joomla\Module\Funweather</namespace>

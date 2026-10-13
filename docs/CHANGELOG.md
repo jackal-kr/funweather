@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.9.3 — 2026-10-13
+- Fix: the condition and icon now follow the model's cloud cover for dry skies, so "clear sky" is no longer shown under a cloudy sky (weather_code and cloud_cover could disagree).
+
 ## 1.9.2 — 2026-10-13
 - Supporting files: LICENSE.txt shipped in the module, full copyright/licence headers in all source files, author and update-server metadata in the manifest.
 

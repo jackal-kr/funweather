@@ -594,10 +594,17 @@
 			}
 		}
 
+		// The model's weather_code can say "clear" while its own cloud_cover says otherwise (and the sky outside agrees with the cover).
+		// For dry skies (codes 0-3) trust the measured cover: <10% clear, <35% mostly clear, <70% partly cloudy, else overcast.
+		function skyCode(code, cover) {
+			if (typeof cover !== 'number' || code > 3) return code;
+			return cover < 10 ? 0 : cover < 35 ? 1 : cover < 70 ? 2 : 3;
+		}
+
 		function fromApi(d) {
 			var c = d.current, y = d.daily;
 			return {
-				time: c.time, code: c.weather_code, day: c.is_day !== 0, temp: c.temperature_2m, feels: c.apparent_temperature,
+				time: c.time, code: skyCode(c.weather_code, c.cloud_cover), rawCode: c.weather_code, day: c.is_day !== 0, temp: c.temperature_2m, feels: c.apparent_temperature,
 				wind: c.wind_speed_10m, dir: c.wind_direction_10m || 0, hum: rnd(c.relative_humidity_2m), press: c.pressure_msl,
 				max: y.temperature_2m_max[0], min: y.temperature_2m_min[0], pop: y.precipitation_probability_max[0] || 0,
 				cover: typeof c.cloud_cover === 'number' ? c.cloud_cover : null,
