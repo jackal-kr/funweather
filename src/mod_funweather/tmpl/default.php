@@ -1,4 +1,10 @@
 <?php
+/**
+ * @package     Fun Weather
+ * @copyright   Copyright (C) 2026 JOD. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
 defined('_JEXEC') or die;
 
 /** @var array  $cfg */

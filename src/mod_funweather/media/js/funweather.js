@@ -1,4 +1,8 @@
 /**
+ * @package     Fun Weather
+ * @copyright   Copyright (C) 2026 JOD. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ *
  * Fun Weather - fetches Open-Meteo, renders the widget and draws weather effects on a canvas.
  * No dependencies. Handles several instances on one page.
  */

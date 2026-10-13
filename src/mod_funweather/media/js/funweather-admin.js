@@ -1,4 +1,8 @@
 /**
+ * @package     Fun Weather
+ * @copyright   Copyright (C) 2026 JOD. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ *
  * Fun Weather admin helper: "find place" fills place / latitude / longitude, "test connection" checks Open-Meteo.
  */
 (function () {

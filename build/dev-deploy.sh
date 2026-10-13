@@ -9,8 +9,7 @@ docker cp "$S/tmpl/."  "$C:$M/tmpl/"
 docker cp "$S/src/."   "$C:$M/src/"
 docker cp "$S/media/." "$C:$ROOT/media/mod_funweather/"
 for d in "$S"/language/*/; do
-  t=$(basename "$d")
-  docker cp "$d." "$C:$ROOT/language/$t/"
+  docker cp "$d." "$C:$ROOT/language/$(basename "$d")/"
 done
 docker exec "$C" chown -R www-data:www-data "$M" "$ROOT/media/mod_funweather"
 echo "Deployed. Hard-refresh the browser (Ctrl+F5)."

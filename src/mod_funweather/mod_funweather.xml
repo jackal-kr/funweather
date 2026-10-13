@@ -2,10 +2,12 @@
 <extension type="module" client="site" method="upgrade">
 	<name>MOD_FUNWEATHER</name>
 	<author>JOD</author>
-	<creationDate>2026-10</creationDate>
-	<copyright>(C) 2026</copyright>
-	<license>GNU General Public License version 2 or later</license>
-	<version>1.9.1</version>
+	<authorEmail>oleksiy.degtyar@gmail.com</authorEmail>
+	<authorUrl>https://github.com/jackal-kr/funweather</authorUrl>
+	<creationDate>2026-10-13</creationDate>
+	<copyright>Copyright (C) 2026 JOD. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<version>1.9.2</version>
 	<description>MOD_FUNWEATHER_XML_DESCRIPTION</description>
 
 	<namespace path="src">Joomla\Module\Funweather</namespace>
@@ -13,6 +15,7 @@
 	<files>
 		<filename module="mod_funweather">mod_funweather.php</filename>
 		<filename>index.html</filename>
+		<filename>LICENSE.txt</filename>
 		<folder>src</folder>
 		<folder>tmpl</folder>
 		<folder>language</folder>
@@ -186,4 +189,7 @@
 			</fieldset>
 		</fields>
 	</config>
+	<updateservers>
+		<server type="extension" name="Fun Weather Update Site">https://raw.githubusercontent.com/jackal-kr/funweather/main/updates/mod_funweather.xml</server>
+	</updateservers>
 </extension>

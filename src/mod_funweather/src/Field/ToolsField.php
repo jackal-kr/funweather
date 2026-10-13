@@ -1,5 +1,9 @@
 <?php
 /**
+ * @package     Fun Weather
+ * @copyright   Copyright (C) 2026 JOD. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ *
  * Admin helper for Fun Weather: place search (fills latitude / longitude) and a connection test.
  * Everything runs in the administrator's browser against Open-Meteo; nothing is stored or sent to the server.
  */

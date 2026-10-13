@@ -1,3 +1,4 @@
 dist/
 *.zip
 old_zips/
+.DS_Store

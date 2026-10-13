@@ -1,5 +1,9 @@
 <?php
 /**
+ * @package     Fun Weather
+ * @copyright   Copyright (C) 2026 JOD. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ *
  * Fun Weather - Joomla 4/5/6 site module.
  * Data: Open-Meteo (free, no API key). All fetching/animation happens in the browser.
  */
