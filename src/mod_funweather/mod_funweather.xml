@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>MOD_FUNWEATHER</name>
+	<author>JOD</author>
+	<creationDate>2026-10</creationDate>
+	<copyright>(C) 2026</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<version>1.9.1</version>
+	<description>MOD_FUNWEATHER_XML_DESCRIPTION</description>
+
+	<namespace path="src">Joomla\Module\Funweather</namespace>
+
+	<files>
+		<filename module="mod_funweather">mod_funweather.php</filename>
+		<filename>index.html</filename>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+		<folder>language</folder>
+	</files>
+
+	<media destination="mod_funweather" folder="media">
+		<folder>css</folder>
+		<folder>js</folder>
+	</media>
+
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.mod_funweather.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.mod_funweather.sys.ini</language>
+		<language tag="pl-PL">language/pl-PL/pl-PL.mod_funweather.ini</language>
+		<language tag="pl-PL">language/pl-PL/pl-PL.mod_funweather.sys.ini</language>
+		<language tag="uk-UA">language/uk-UA/uk-UA.mod_funweather.ini</language>
+		<language tag="uk-UA">language/uk-UA/uk-UA.mod_funweather.sys.ini</language>
+		<language tag="cs-CZ">language/cs-CZ/cs-CZ.mod_funweather.ini</language>
+		<language tag="cs-CZ">language/cs-CZ/cs-CZ.mod_funweather.sys.ini</language>
+		<language tag="de-DE">language/de-DE/de-DE.mod_funweather.ini</language>
+		<language tag="de-DE">language/de-DE/de-DE.mod_funweather.sys.ini</language>
+		<language tag="hu-HU">language/hu-HU/hu-HU.mod_funweather.ini</language>
+		<language tag="hu-HU">language/hu-HU/hu-HU.mod_funweather.sys.ini</language>
+		<language tag="ru-RU">language/ru-RU/ru-RU.mod_funweather.ini</language>
+		<language tag="ru-RU">language/ru-RU/ru-RU.mod_funweather.sys.ini</language>
+	</languages>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addfieldprefix="Joomla\Module\Funweather\Site\Field">
+				<field name="place" type="text" default="Kraków" label="MOD_FUNWEATHER_PLACE" description="MOD_FUNWEATHER_PLACE_DESC" />
+				<field name="lat" type="number" default="50.0647" step="0.0001" min="-90" max="90" label="MOD_FUNWEATHER_LAT" description="MOD_FUNWEATHER_LATLON_DESC" />
+				<field name="lon" type="number" default="19.9450" step="0.0001" min="-180" max="180" label="MOD_FUNWEATHER_LON" description="MOD_FUNWEATHER_LATLON_DESC" />
+				<field name="tools" type="Tools" label="MOD_FUNWEATHER_TOOLS" description="MOD_FUNWEATHER_TOOLS_DESC" />
+				<field name="language" type="list" default="auto" label="MOD_FUNWEATHER_LANGUAGE" description="MOD_FUNWEATHER_LANGUAGE_DESC">
+					<option value="auto">MOD_FUNWEATHER_LANG_AUTO</option>
+					<option value="en-GB">English</option>
+					<option value="pl-PL">Polski</option>
+					<option value="uk-UA">Українська</option>
+					<option value="cs-CZ">Čeština</option>
+					<option value="de-DE">Deutsch</option>
+					<option value="hu-HU">Magyar</option>
+					<option value="ru-RU">Русский</option>
+				</field>
+				<field name="refresh" type="number" default="15" min="5" max="180" step="5" label="MOD_FUNWEATHER_REFRESH" />
+				<field name="temp_unit" type="list" default="c" label="MOD_FUNWEATHER_TEMP_UNIT">
+					<option value="c">°C</option>
+					<option value="f">°F</option>
+				</field>
+				<field name="wind_unit" type="list" default="kmh" label="MOD_FUNWEATHER_WIND_UNIT">
+					<option value="kmh">km/h</option>
+					<option value="ms">m/s</option>
+					<option value="mph">mph</option>
+				</field>
+				<field name="model" type="list" default="auto" label="MOD_FUNWEATHER_MODEL" description="MOD_FUNWEATHER_MODEL_DESC">
+					<option value="auto">MOD_FUNWEATHER_MODEL_AUTO</option>
+					<option value="ecmwf_ifs025">ECMWF IFS (Europe)</option>
+					<option value="icon_eu">ICON-EU (DWD, Central Europe)</option>
+					<option value="meteofrance_seamless">Météo-France (AROME / ARPEGE)</option>
+					<option value="gfs_seamless">GFS (NOAA, global)</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="details" label="MOD_FUNWEATHER_FS_DETAILS">
+				<field name="dstyle" type="list" default="text" label="MOD_FUNWEATHER_DSTYLE" description="MOD_FUNWEATHER_DSTYLE_DESC">
+					<option value="text">MOD_FUNWEATHER_DS_TEXT</option>
+					<option value="cards">MOD_FUNWEATHER_DS_CARDS</option>
+					<option value="tiles">MOD_FUNWEATHER_DS_TILES</option>
+					<option value="list">MOD_FUNWEATHER_DS_LIST</option>
+					<option value="chips">MOD_FUNWEATHER_DS_CHIPS</option>
+				</field>
+				<field name="show_place" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="MOD_FUNWEATHER_SHOW_PLACE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="show_feels" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="MOD_FUNWEATHER_SHOW_FEELS">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="show_range" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="MOD_FUNWEATHER_SHOW_RANGE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="show_rain" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="MOD_FUNWEATHER_SHOW_RAIN">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="show_wind" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="MOD_FUNWEATHER_SHOW_WIND">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="show_humidity" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="MOD_FUNWEATHER_SHOW_HUMIDITY">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="show_pressure" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="MOD_FUNWEATHER_SHOW_PRESSURE">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="show_sun" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="MOD_FUNWEATHER_SHOW_SUN">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="show_tip" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="MOD_FUNWEATHER_SHOW_TIP" description="MOD_FUNWEATHER_SHOW_TIP_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="tip_season" type="list" default="auto" showon="show_tip:1" label="MOD_FUNWEATHER_TIP_SEASON" description="MOD_FUNWEATHER_TIP_SEASON_DESC">
+					<option value="auto">MOD_FUNWEATHER_TIP_SEASON_AUTO</option>
+					<option value="winter">MOD_FUNWEATHER_SEASON_WINTER</option>
+					<option value="spring">MOD_FUNWEATHER_SEASON_SPRING</option>
+					<option value="summer">MOD_FUNWEATHER_SEASON_SUMMER</option>
+					<option value="autumn">MOD_FUNWEATHER_SEASON_AUTUMN</option>
+				</field>
+				<field name="show_outlook" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="MOD_FUNWEATHER_SHOW_OUTLOOK" description="MOD_FUNWEATHER_SHOW_OUTLOOK_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="show_forecast" type="radio" layout="joomla.form.field.radio.switcher" default="0" label="MOD_FUNWEATHER_SHOW_FORECAST" description="MOD_FUNWEATHER_SHOW_FORECAST_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="show_credit" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="MOD_FUNWEATHER_SHOW_CREDIT" description="MOD_FUNWEATHER_SHOW_CREDIT_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+
+			<fieldset name="fun" label="MOD_FUNWEATHER_FS_FUN">
+				<field name="shape" type="list" default="rounded" label="MOD_FUNWEATHER_SHAPE" description="MOD_FUNWEATHER_SHAPE_DESC">
+					<option value="rounded">MOD_FUNWEATHER_SHAPE_ROUNDED</option>
+					<option value="full">MOD_FUNWEATHER_SHAPE_FULL</option>
+				</field>
+				<field name="frame_offset" type="text" default="auto" showon="shape:full" label="MOD_FUNWEATHER_FRAME_PAD" description="MOD_FUNWEATHER_FRAME_PAD_DESC" />
+				<field name="background" type="radio" layout="joomla.form.field.radio.switcher" default="1" label="MOD_FUNWEATHER_BACKGROUND" description="MOD_FUNWEATHER_BACKGROUND_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="effects" type="list" default="1" label="MOD_FUNWEATHER_EFFECTS" description="MOD_FUNWEATHER_EFFECTS_DESC">
+						<option value="1">MOD_FUNWEATHER_EFFECTS_BOTH</option>
+						<option value="weather">MOD_FUNWEATHER_EFFECTS_WEATHER</option>
+						<option value="season">MOD_FUNWEATHER_EFFECTS_SEASON</option>
+						<option value="0">MOD_FUNWEATHER_EFFECTS_OFF</option>
+					</field>
+				<field name="preview" type="list" default="" showon="effects:1,weather" label="MOD_FUNWEATHER_PREVIEW" description="MOD_FUNWEATHER_PREVIEW_DESC">
+					<option value="">MOD_FUNWEATHER_PREVIEW_OFF</option>
+					<option value="clear">MOD_FUNWEATHER_PV_CLEAR</option>
+					<option value="night">MOD_FUNWEATHER_PV_NIGHT</option>
+					<option value="cloudy">MOD_FUNWEATHER_PV_CLOUDY</option>
+					<option value="rain">MOD_FUNWEATHER_PV_RAIN</option>
+					<option value="storm">MOD_FUNWEATHER_PV_STORM</option>
+					<option value="snow">MOD_FUNWEATHER_PV_SNOW</option>
+					<option value="fog">MOD_FUNWEATHER_PV_FOG</option>
+					<option value="wind">MOD_FUNWEATHER_PV_WIND</option>
+						<option value="dawn">MOD_FUNWEATHER_PV_DAWN</option>
+						<option value="dusk">MOD_FUNWEATHER_PV_DUSK</option>
+						<option value="ice">MOD_FUNWEATHER_PV_ICE</option>
+						<option value="hail">MOD_FUNWEATHER_PV_HAIL</option>
+				</field>
+					<field name="preview_season" type="list" default="" showon="effects:1,season" label="MOD_FUNWEATHER_PREVIEW_SEASON" description="MOD_FUNWEATHER_PREVIEW_SEASON_DESC">
+						<option value="">MOD_FUNWEATHER_PREVIEW_SEASON_OFF</option>
+						<option value="winter">MOD_FUNWEATHER_SEASON_WINTER</option>
+						<option value="spring">MOD_FUNWEATHER_SEASON_SPRING</option>
+						<option value="summer">MOD_FUNWEATHER_SEASON_SUMMER</option>
+						<option value="autumn">MOD_FUNWEATHER_SEASON_AUTUMN</option>
+					</field>
+			</fieldset>
+
+			<fieldset name="advanced">
+				<field name="moduleclass_sfx" type="textarea" rows="2" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" validate="CssIdentifier" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

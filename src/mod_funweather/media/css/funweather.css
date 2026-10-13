@@ -1,0 +1,132 @@
+.fw-widget {
+	--fw-bg: linear-gradient(160deg, #4facfe, #2b7de9);
+	position: relative;
+	overflow: hidden;
+	box-sizing: border-box;
+	margin: 0 0 1rem;
+	padding: 1rem 1.15rem;
+	border-radius: 14px;
+	color: #fff;
+	background: var(--fw-bg);
+	text-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+	transition: background .6s;
+}
+
+.fw-widget.fw-hide { display: none !important; }
+
+/* "Fill the frame": no corners, no border, no shadow; negative margins (set by the script, or --fw-pad) cancel the module frame's padding */
+.fw-widget.fw-full {
+	margin: calc(-1 * var(--fw-pad, 0px));
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.fw-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.fw-body { position: relative; z-index: 1; }
+
+.fw-place { margin-bottom: .6rem; font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .9; }
+
+.fw-main { display: flex; align-items: center; flex-wrap: wrap; gap: .7rem 1.1rem; margin: 0 0 .4rem; }
+.fw-icon { display: inline-block; font-size: 2.6rem; line-height: 1; animation: fw-float 4s ease-in-out infinite; text-shadow: none; }
+.fw-temp { font-size: 2.2rem; font-weight: 600; line-height: 1; }
+.fw-cond { font-size: 1rem; opacity: .95; }
+
+.fw-sub { font-size: .8rem; opacity: .9; line-height: 1.5; }
+.fw-sub .fw-arrow { display: inline-block; }
+
+.fw-tip { display: inline-block; margin-top: .6rem; padding: .3rem .65rem; border-radius: 8px; font-size: .85rem; background: rgba(255, 255, 255, .16); }
+.fw-tip:empty { display: none; }
+
+/* ---- details styles (default "text" is the plain wrapping line above) ---- */
+.fw-i .fw-arrow { display: inline-block; }
+.fw-nw { white-space: nowrap; }
+
+/* grouped cards: icon + title, big value, caption */
+.fw-d-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5em, 1fr)); gap: 1.1em 1.2em; margin-top: .9rem; font-size: .85rem; opacity: 1; }
+.fw-d-cards .fw-ct { display: flex; align-items: center; gap: .5em; opacity: .8; }
+.fw-d-cards .fw-ic { font-size: 1.1em; line-height: 1; text-shadow: none; }
+.fw-d-cards .fw-v { display: block; margin: .25em 0 .15em; font-size: 1.5em; font-weight: 600; line-height: 1.2; }
+.fw-d-cards .fw-cap { display: block; opacity: .72; }
+
+/* tiles: value over label */
+.fw-d-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(5.8em, 1fr)); gap: .45em; margin-top: .7rem; opacity: 1; }
+.fw-d-tiles .fw-i { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: .55em .3em; border-radius: .7em; background: rgba(255, 255, 255, .14); text-align: center; }
+.fw-d-tiles .fw-v { font-size: 1.2em; font-weight: 600; line-height: 1.25; white-space: nowrap; }
+.fw-d-tiles .fw-l { font-size: .85em; opacity: .85; }
+
+/* list: label left, value right */
+.fw-d-list { display: grid; grid-template-columns: minmax(0, 1fr); margin-top: .6rem; opacity: 1; }
+.fw-d-list .fw-i { display: flex; justify-content: space-between; gap: 1em; padding: .35em 0; border-bottom: 1px solid rgba(255, 255, 255, .2); }
+.fw-d-list .fw-i:last-child { border-bottom: 0; }
+.fw-d-list .fw-l { opacity: .85; }
+.fw-d-list .fw-v { font-weight: 600; }
+
+/* chips: icon + value */
+.fw-d-chips { display: flex; flex-wrap: wrap; gap: .45em; margin-top: .7rem; opacity: 1; }
+.fw-d-chips .fw-i { display: inline-flex; align-items: center; gap: .4em; padding: .3em .7em; border-radius: 999px; background: rgba(255, 255, 255, .16); white-space: nowrap; }
+.fw-d-chips .fw-ic { text-shadow: none; }
+.fw-d-chips .fw-v { font-weight: 600; }
+
+@keyframes fw-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+/* ---- weather backgrounds (day, then night) ---- */
+.fw-t-clear  { --fw-bg: linear-gradient(160deg, #4facfe, #2b7de9); }
+.fw-t-clear.fw-night  { --fw-bg: linear-gradient(160deg, #14264f, #0a1330); }
+.fw-t-cloudy { --fw-bg: linear-gradient(160deg, #7b8da3, #4e5f75); }
+.fw-t-cloudy.fw-night { --fw-bg: linear-gradient(160deg, #2e3746, #1a212c); }
+.fw-t-rain   { --fw-bg: linear-gradient(160deg, #5a6b80, #2f3d50); }
+.fw-t-rain.fw-night   { --fw-bg: linear-gradient(160deg, #222c3a, #10161f); }
+.fw-t-storm  { --fw-bg: linear-gradient(160deg, #433863, #1d1738); }
+.fw-t-storm.fw-night  { --fw-bg: linear-gradient(160deg, #271f40, #0d0a1c); }
+.fw-t-snow   { --fw-bg: linear-gradient(160deg, #8fa6bf, #5d7690); }
+.fw-t-snow.fw-night   { --fw-bg: linear-gradient(160deg, #3a4a5e, #1e2a3a); }
+.fw-t-fog    { --fw-bg: linear-gradient(160deg, #9aa5ad, #6b7780); }
+.fw-t-fog.fw-night    { --fw-bg: linear-gradient(160deg, #3b434a, #252b30); }
+
+/* ---- seasonal tints for clear and cloudy skies (rain, snow, storm and fog keep their own look) ---- */
+.fw-s-spring.fw-t-clear  { --fw-bg: linear-gradient(160deg, #5cc6f5, #3a9be0 60%, #6cc48a); }
+.fw-s-spring.fw-t-clear.fw-night { --fw-bg: linear-gradient(160deg, #16305a, #0c1a38 70%, #12302f); }
+.fw-s-summer.fw-t-clear  { --fw-bg: linear-gradient(160deg, #3b9bff, #1f6fe0 65%, #f5b94a); }
+.fw-s-summer.fw-t-clear.fw-night { --fw-bg: linear-gradient(160deg, #1a2250, #0b1030 70%, #3a2a4a); }
+.fw-s-autumn.fw-t-clear  { --fw-bg: linear-gradient(160deg, #6fa8e0, #4a78c0 55%, #e0974a); }
+.fw-s-autumn.fw-t-clear.fw-night { --fw-bg: linear-gradient(160deg, #1d2547, #12172e 65%, #3d2a30); }
+.fw-s-winter.fw-t-clear  { --fw-bg: linear-gradient(160deg, #9fd0f2, #6aa6dc 60%, #dbe9f5); }
+.fw-s-winter.fw-t-clear.fw-night { --fw-bg: linear-gradient(160deg, #101d3d, #080f26 70%, #1b2f4f); }
+.fw-s-spring.fw-t-cloudy { --fw-bg: linear-gradient(160deg, #86a0a8, #587a80); }
+.fw-s-summer.fw-t-cloudy { --fw-bg: linear-gradient(160deg, #8a9bb0, #5a6e8a); }
+.fw-s-autumn.fw-t-cloudy { --fw-bg: linear-gradient(160deg, #8f8a86, #5e5753); }
+.fw-s-winter.fw-t-cloudy { --fw-bg: linear-gradient(160deg, #a3b2c2, #7388a0); }
+.fw-s-spring.fw-t-cloudy.fw-night, .fw-s-summer.fw-t-cloudy.fw-night { --fw-bg: linear-gradient(160deg, #2e3746, #1a212c); }
+.fw-s-autumn.fw-t-cloudy.fw-night { --fw-bg: linear-gradient(160deg, #35302f, #1c1918); }
+.fw-s-winter.fw-t-cloudy.fw-night { --fw-bg: linear-gradient(160deg, #2c3a4e, #172233); }
+
+/* dark page (Joomla/Bootstrap dark mode or OS dark): tone the bright gradients down a little */
+.fw-widget.fw-surf-dark:not(.fw-nobg) { background: linear-gradient(rgba(0, 0, 0, .22), rgba(0, 0, 0, .22)), var(--fw-bg); }
+
+/* "no background" mode: let the site's own colours show through */
+.fw-nobg { background: transparent; color: inherit; text-shadow: none; box-shadow: none; border: 1px solid rgba(128, 128, 128, .3); }
+.fw-nobg .fw-tip, .fw-nobg .fw-d-tiles .fw-i, .fw-nobg .fw-d-chips .fw-i { background: rgba(128, 128, 128, .15); }
+.fw-nobg .fw-d-list .fw-i { border-bottom-color: rgba(128, 128, 128, .3); }
+
+@media (prefers-reduced-motion: reduce) { .fw-icon { animation: none; } }
+.fw-icon svg { display: block; }
+.fw-credit { margin-top: .6rem; font-size: .68rem; opacity: .6; }
+.fw-credit a { color: inherit; text-decoration: underline; }
+.fw-credit a:hover { opacity: 1; }
+
+/* outlook line, 3-day row, stale note */
+.fw-outlook { display: flex; flex-wrap: wrap; gap: .3rem 1rem; margin-top: .8rem; font-size: .95rem; font-weight: 600; }
+.fw-outlook:empty, .fw-fc:empty, .fw-note:empty { display: none; }
+.fw-olic { text-shadow: none; }
+.fw-fc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; margin-top: .7rem; text-align: center; }
+.fw-fcd { padding: .65rem .25rem .6rem; border-radius: .8rem; background: rgba(255, 255, 255, .16); }
+.fw-fcl { font-size: .85rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; opacity: .9; }
+.fw-fci { margin: .3rem 0 .25rem; font-size: 2.1rem; line-height: 1.15; text-shadow: none; }
+.fw-fct { display: flex; justify-content: center; align-items: baseline; gap: .4em; white-space: nowrap; }
+.fw-hi { font-size: 1.1rem; font-weight: 700; }
+.fw-lo { font-size: .95rem; opacity: .75; }
+.fw-nobg .fw-fcd { background: rgba(128, 128, 128, .15); }
+.fw-note { margin-top: .5rem; font-size: .72rem; opacity: .85; }
+.fw-stale .fw-main, .fw-stale .fw-sub { opacity: .6; }

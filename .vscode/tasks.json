@@ -1,0 +1,9 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "FunWeather: Build", "type": "shell", "command": "./build/build.sh" },
+    { "label": "FunWeather: Build + Deploy", "type": "shell",
+      "command": "./build/build.sh && ./build/dev-deploy.sh",
+      "group": { "kind": "build", "isDefault": true } }
+  ]
+}
